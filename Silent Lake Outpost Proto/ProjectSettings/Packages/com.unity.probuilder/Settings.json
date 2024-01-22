@@ -93,30 +93,18 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-<<<<<<< Updated upstream
                 "key": "UVEditor.showPreviewMaterial",
-=======
-                "key": "editor.extrudeEdgesAsGroup",
->>>>>>> Stashed changes
                 "value": "{\"m_Value\":true}"
             },
             {
                 "type": "UnityEngine.ProBuilder.SelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "editor.selectMode",
-<<<<<<< Updated upstream
                 "value": "{\"m_Value\":2}"
-=======
-                "value": "{\"m_Value\":1}"
->>>>>>> Stashed changes
             },
             {
                 "type": "UnityEngine.ProBuilder.SelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "editor.lastMeshSelectMode",
-<<<<<<< Updated upstream
                 "value": "{\"m_Value\":2}"
-=======
-                "value": "{\"m_Value\":8}"
->>>>>>> Stashed changes
             },
             {
                 "type": "UnityEngine.ProBuilder.SelectionModifierBehavior, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -151,11 +139,7 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
-<<<<<<< Updated upstream
-                "value": "{\"m_Value\":{\"x\":-7.852764129638672,\"y\":1.8562116622924805,\"z\":-10.3231201171875}}"
-=======
-                "value": "{\"m_Value\":{\"x\":-18.550777435302736,\"y\":-0.355743408203125,\"z\":18.424972534179689}}"
->>>>>>> Stashed changes
+                "value": "{\"m_Value\":{\"x\":-23.588451385498048,\"y\":1.7142030000686646,\"z\":15.397842407226563}}"
             },
             {
                 "type": "UnityEngine.Quaternion, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
