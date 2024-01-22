@@ -1,6 +1,5 @@
 ## Unity ##
 
-*.terrain.asset binary
 *.cs diff=csharp text
 *.cginc text
 *.shader text
