@@ -6,8 +6,17 @@ using UnityEngine;
 public class ShowItem : MonoBehaviour
 {
     [SerializeField] GameObject camera;
+    [SerializeField] Light flash;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip photoClip;
+
+    private bool isLightActive = false;
+
+    private void Start()
+    {
+        flash.enabled = false;
+    }
+
     private void Update()
     {
         PlayAudio();
@@ -27,12 +36,25 @@ public class ShowItem : MonoBehaviour
         if (camera.activeSelf && Input.GetKeyDown(KeyCode.Mouse0)) 
         {
             audioSource.PlayOneShot(photoClip);
+            ToggleFlash();
         }
     }
 
-    /*private IEnumerator TurnFlashOff() 
+    private void ToggleFlash()
     {
-        
+        isLightActive = !isLightActive;
+        flash.enabled = isLightActive;
+
+        if(isLightActive)
+        {
+            Invoke("DeactivateFlash", 0.25f);
+        }
     }
-    */
+
+    private void DeactivateFlash()
+    {
+        flash.enabled = false;
+        isLightActive= false;
+    }
+
 }
