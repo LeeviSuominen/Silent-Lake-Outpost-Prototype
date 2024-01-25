@@ -7,20 +7,26 @@ public class ShowItem : MonoBehaviour
 {
     [SerializeField] GameObject camera;
     [SerializeField] Light flash;
+    [SerializeField] GameObject flashLight;
+    [SerializeField] Light flashLightSpotLight;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip photoClip;
 
     private bool isLightActive = false;
+    private bool toggleFlashLightLight = false;
 
     private void Start()
     {
         flash.enabled = false;
+        flashLightSpotLight.enabled = false;
     }
 
     private void Update()
     {
         PlayAudio();
-        if (!camera.activeSelf && Input.GetKeyDown(KeyCode.C))
+        FlashLightOn();
+
+        if (!camera.activeSelf && !flashLight.activeSelf && Input.GetKeyDown(KeyCode.C))
         {
             camera.SetActive(true);
         }
@@ -28,6 +34,16 @@ public class ShowItem : MonoBehaviour
         else if (camera.activeSelf && Input.GetKeyDown(KeyCode.C))
         {
             camera.SetActive(false);
+        }
+
+        if(!flashLight.activeSelf && !camera.activeSelf && Input.GetKeyDown(KeyCode.F))
+        {
+            flashLight.SetActive(true);
+        }
+
+        else if(flashLight.activeSelf && Input.GetKeyDown(KeyCode.F))
+        {
+            flashLight.SetActive(false);
         }
     }
 
@@ -54,7 +70,20 @@ public class ShowItem : MonoBehaviour
     private void DeactivateFlash()
     {
         flash.enabled = false;
-        isLightActive= false;
+        isLightActive = false;
     }
 
+    void FlashLightOn()
+    {
+        if (flashLight.activeSelf && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            flashLightSpotLight.enabled = true;
+            toggleFlashLightLight = !toggleFlashLightLight;
+        }
+
+        else if(toggleFlashLightLight)
+        {
+            flashLightSpotLight.enabled = false;
+        }
+    }
 }
