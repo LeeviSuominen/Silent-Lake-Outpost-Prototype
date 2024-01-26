@@ -10,6 +10,8 @@ public class ShowItem : MonoBehaviour
     [SerializeField] GameObject flashLight;
     [SerializeField] Light flashLightSpotLight;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource flashLightSource;
+    [SerializeField] AudioClip flashLightClip;
     [SerializeField] AudioClip photoClip;
 
     private bool isLightActive = false;
@@ -91,6 +93,7 @@ public class ShowItem : MonoBehaviour
         {
             flashLightSpotLight.enabled = true;
             toggleFlashLightLight = !toggleFlashLightLight;
+            flashLightSource.PlayOneShot(flashLightClip);
         }
 
         else if(toggleFlashLightLight)
