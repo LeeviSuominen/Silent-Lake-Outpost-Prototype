@@ -43,7 +43,7 @@ public class Sleep : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Physics.Raycast(ray, out hit, 2, mask))
+            if (Physics.Raycast(ray, out hit, 4, mask))
             {
                 if (hit.collider.gameObject == item)
                 {

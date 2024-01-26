@@ -31,6 +31,12 @@ public class ShowItem : MonoBehaviour
             camera.SetActive(true);
         }
 
+        else if (!camera.activeSelf && flashLight.activeSelf && Input.GetKeyDown(KeyCode.C))
+        {
+            camera.SetActive(true);
+            flashLight.SetActive(false);
+        }
+
         else if (camera.activeSelf && Input.GetKeyDown(KeyCode.C))
         {
             camera.SetActive(false);
@@ -38,6 +44,12 @@ public class ShowItem : MonoBehaviour
 
         if(!flashLight.activeSelf && !camera.activeSelf && Input.GetKeyDown(KeyCode.F))
         {
+            flashLight.SetActive(true);
+        }
+
+        else if (!flashLight.activeSelf && camera.activeSelf && Input.GetKeyDown(KeyCode.F))
+        {
+            camera.SetActive(false);
             flashLight.SetActive(true);
         }
 
