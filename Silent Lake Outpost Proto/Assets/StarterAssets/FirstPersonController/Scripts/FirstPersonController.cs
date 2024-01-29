@@ -86,6 +86,9 @@ namespace StarterAssets
             }
         }
 
+
+        private Animator animator;
+
         private void Awake()
         {
             // get a reference to our main camera
@@ -98,6 +101,7 @@ namespace StarterAssets
         private void Start()
         {
             _controller = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
@@ -194,8 +198,24 @@ namespace StarterAssets
                 inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
             }
 
-            // move the player
-            _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            if (_input.move == Vector2.zero)
+            {
+                animator.SetFloat("Speed", 0);
+            }
+            else if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                animator.SetFloat("Speed", 0.5f);
+
+            }
+            else
+            {
+                animator.SetFloat("Speed", 1);
+
+            }
+                // move the player
+                _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            
+            
         }
 
         private void JumpAndGravity()
