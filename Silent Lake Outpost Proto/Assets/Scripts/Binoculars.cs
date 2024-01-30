@@ -39,6 +39,7 @@ public class Binoculars : MonoBehaviour
         else if (isZoomed && Input.GetKeyDown(KeyCode.Mouse0))
         {
             isZoomed = false;
+            binoculars.SetActive(true);
         }
 
         else if (!isZoomed)
