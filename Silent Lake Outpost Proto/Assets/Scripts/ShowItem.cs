@@ -9,8 +9,11 @@ public class ShowItem : MonoBehaviour
     [SerializeField] Light flash;
     [SerializeField] GameObject flashLight;
     [SerializeField] Light flashLightSpotLight;
+    [SerializeField] GameObject binocs;
+
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioSource flashLightSource;
+
     [SerializeField] AudioClip flashLightClip;
     [SerializeField] AudioClip photoClip;
 
@@ -27,38 +30,9 @@ public class ShowItem : MonoBehaviour
     {
         PlayAudio();
         FlashLightOn();
-
-        if (!camera.activeSelf && !flashLight.activeSelf && Input.GetKeyDown(KeyCode.C))
-        {
-            camera.SetActive(true);
-        }
-
-        else if (!camera.activeSelf && flashLight.activeSelf && Input.GetKeyDown(KeyCode.C))
-        {
-            camera.SetActive(true);
-            flashLight.SetActive(false);
-        }
-
-        else if (camera.activeSelf && Input.GetKeyDown(KeyCode.C))
-        {
-            camera.SetActive(false);
-        }
-
-        if(!flashLight.activeSelf && !camera.activeSelf && Input.GetKeyDown(KeyCode.F))
-        {
-            flashLight.SetActive(true);
-        }
-
-        else if (!flashLight.activeSelf && camera.activeSelf && Input.GetKeyDown(KeyCode.F))
-        {
-            camera.SetActive(false);
-            flashLight.SetActive(true);
-        }
-
-        else if(flashLight.activeSelf && Input.GetKeyDown(KeyCode.F))
-        {
-            flashLight.SetActive(false);
-        }
+        CameraShow();
+        FLashLightShow();
+        BinocularsShow();
     }
 
     private void PlayAudio()
@@ -99,6 +73,66 @@ public class ShowItem : MonoBehaviour
         else if(toggleFlashLightLight)
         {
             flashLightSpotLight.enabled = false;
+        }
+    }
+
+    void CameraShow()
+    {
+        if (!camera.activeSelf && !flashLight.activeSelf && !binocs.activeSelf && Input.GetKeyDown(KeyCode.C))
+        {
+            camera.SetActive(true);
+        }
+
+        else if (!camera.activeSelf && flashLight.activeSelf || binocs.activeSelf && Input.GetKeyDown(KeyCode.C))
+        {
+            camera.SetActive(true);
+            flashLight.SetActive(false);
+            binocs.SetActive(false);
+        }
+
+        else if (camera.activeSelf && Input.GetKeyDown(KeyCode.C))
+        {
+            camera.SetActive(false);
+        }
+    }
+
+    void FLashLightShow()
+    {
+        if (!flashLight.activeSelf && !camera.activeSelf && !binocs.activeSelf && Input.GetKeyDown(KeyCode.F))
+        {
+            flashLight.SetActive(true);
+        }
+
+        else if (!flashLight.activeSelf && camera.activeSelf || binocs.activeSelf && Input.GetKeyDown(KeyCode.F))
+        {
+            camera.SetActive(false);
+            flashLight.SetActive(true);
+            binocs.SetActive(false);
+        }
+
+        else if (flashLight.activeSelf && Input.GetKeyDown(KeyCode.F))
+        {
+            flashLight.SetActive(false);
+        }
+    }
+
+    void BinocularsShow()
+    {
+        if(!binocs.activeSelf && !camera.activeSelf && !flashLight.activeSelf && Input.GetKeyDown(KeyCode.B))
+        {
+            binocs.SetActive(true);
+        }
+
+        else if (!binocs.activeSelf && camera.activeSelf || flashLight.activeSelf && Input.GetKeyDown(KeyCode.B))
+        {
+            camera.SetActive(false);
+            flashLight.SetActive(false);
+            binocs.SetActive(true);
+        }
+
+        else if(binocs.activeSelf && Input.GetKeyDown(KeyCode.B))
+        {
+            binocs.SetActive(false);
         }
     }
 }

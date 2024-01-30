@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Binoculars : MonoBehaviour
 {
-     [SerializeField] GameObject binoculars;
-     [SerializeField] int zoomedIn = 25;
-     [SerializeField] int zoomedOut = 60;
-     [SerializeField] float smoothView = 4.5f;
+    [SerializeField] GameObject binoculars;
+    [SerializeField] GameObject crosshair;
+    [SerializeField] int zoomedIn = 25;
+    [SerializeField] int zoomedOut = 60;
+    [SerializeField] float smoothView = 4.5f;
 
-     private bool isZoomed;
+    private bool isZoomed;
 
-     [SerializeField] Texture2D binocImage;
+    [SerializeField] Texture2D binocImage;
     
 
     Camera cam;
@@ -35,12 +36,17 @@ public class Binoculars : MonoBehaviour
             isZoomed = true;
         }
 
-       /* else
+        else if (isZoomed && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            isZoomed = false;
+        }
+
+        else if (!isZoomed)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomedOut, Time.deltaTime * smoothView);
             isZoomed = false;
         }
-        */
+        
     }
 
     void OnGUI()
@@ -48,6 +54,9 @@ public class Binoculars : MonoBehaviour
         if(isZoomed)
         {
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), binocImage);
+            binoculars.SetActive(false);
+            crosshair.SetActive(false);
         } 
+        
     }
 }
