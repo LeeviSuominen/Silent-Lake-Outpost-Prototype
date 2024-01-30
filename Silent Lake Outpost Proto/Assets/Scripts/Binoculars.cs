@@ -10,7 +10,7 @@ public class Binoculars : MonoBehaviour
     [SerializeField] int zoomedOut = 60;
     [SerializeField] float smoothView = 4.5f;
 
-    private bool isZoomed;
+    public bool isZoomed;
 
     [SerializeField] Texture2D binocImage;
     
@@ -46,6 +46,7 @@ public class Binoculars : MonoBehaviour
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomedOut, Time.deltaTime * smoothView);
             isZoomed = false;
+            crosshair.SetActive(true);
         }
         
     }

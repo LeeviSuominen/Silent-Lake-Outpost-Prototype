@@ -20,10 +20,13 @@ public class ShowItem : MonoBehaviour
     private bool isLightActive = false;
     private bool toggleFlashLightLight = false;
 
+    Binoculars binocScript;
+
     private void Start()
     {
         flash.enabled = false;
         flashLightSpotLight.enabled = false;
+        binocScript = GetComponent<Binoculars>();
     }
 
     private void Update()
@@ -78,7 +81,7 @@ public class ShowItem : MonoBehaviour
 
     void CameraShow()
     {
-        if (!cameraObject.activeSelf && !flashLight.activeSelf && !binocs.activeSelf && Input.GetKeyDown(KeyCode.C))
+        if (!cameraObject.activeSelf && !flashLight.activeSelf && !binocs.activeSelf && !binocScript.isZoomed && Input.GetKeyDown(KeyCode.C))
         {
             cameraObject.SetActive(true);
         }
@@ -98,7 +101,7 @@ public class ShowItem : MonoBehaviour
 
     void FlashLightShow()
     {
-        if (!flashLight.activeSelf && !cameraObject.activeSelf && !binocs.activeSelf && Input.GetKeyDown(KeyCode.F))
+        if (!flashLight.activeSelf && !cameraObject.activeSelf && !binocs.activeSelf && !binocScript.isZoomed && Input.GetKeyDown(KeyCode.F))
         {
             flashLight.SetActive(true);
         }
@@ -118,7 +121,7 @@ public class ShowItem : MonoBehaviour
 
     void BinocularsShow()
     {
-        if (!binocs.activeSelf && !cameraObject.activeSelf && !flashLight.activeSelf && Input.GetKeyDown(KeyCode.B))
+        if (!binocs.activeSelf && !cameraObject.activeSelf && !flashLight.activeSelf && !binocScript.isZoomed && Input.GetKeyDown(KeyCode.B))
         {
             binocs.SetActive(true);
         }
