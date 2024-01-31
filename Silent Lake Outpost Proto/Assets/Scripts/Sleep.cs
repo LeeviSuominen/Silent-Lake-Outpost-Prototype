@@ -12,9 +12,9 @@ public class Sleep : MonoBehaviour
     [SerializeField] LayerMask mask;
     Vector3 mousePos;
     Camera cam;
-    public GameObject NightSky;
-    public GameObject DaySky;
-    public GameObject Darkening;
+    [SerializeField] GameObject nightSky;
+    [SerializeField] GameObject daySky;
+    [SerializeField] GameObject darkening;
 
     private void Start()
     {
@@ -72,7 +72,7 @@ public class Sleep : MonoBehaviour
                 {
                     // Koodi tähän, että mitä tapahtuu kun pelaaja painaa E:tä. Mahdollisesti uusi scene, missä voisi lukea "Day 2, Day3, Day4 yms...
 
-                    Sleeping(Darkening, NightSky, DaySky);
+                    Sleeping(darkening, nightSky, daySky);
                 }
             }
         }
