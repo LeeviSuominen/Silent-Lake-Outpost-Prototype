@@ -21,6 +21,9 @@ namespace StarterAssets
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
 
+        public GameObject Darkening;
+        public GameObject WakingUp;
+
         [Space(10)]
         [Tooltip("The height the player can jump")]
         public float JumpHeight = 1.2f;
@@ -123,7 +126,10 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            CameraRotation();
+            if(!Darkening.activeSelf && !WakingUp.activeSelf)
+            {
+                CameraRotation();
+            }
         }
 
         private void GroundedCheck()
