@@ -1,38 +1,42 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Binoculars : MonoBehaviour
 {
+    [SerializeField] CinemachineVirtualCamera _virtualCamera;
+
     [SerializeField] GameObject binoculars;
     [SerializeField] GameObject crosshair;
-    [SerializeField] int zoomedIn = 25;
-    [SerializeField] int zoomedOut = 60;
-    [SerializeField] float smoothView = 4.5f;
+    [SerializeField] float minZoom = 2f;
+    [SerializeField] float maxZoom = 50f;
+    [SerializeField] float sensitivity = 10f;
+    private float fov;
 
-    private bool isZoomed;
+    public bool isZoomed;
 
     [SerializeField] Texture2D binocImage;
-    
 
-    Camera cam;
-
-    private void Start()
-    {
-        cam = Camera.main;
-    }
-
-    
     private void Update()
     {
-         CheckZoom();    
+        CheckZoom();
+
+        if(isZoomed)
+        {
+            ScrollWheelZoom();
+        }
+
+        else 
+        {
+            _virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(_virtualCamera.m_Lens.FieldOfView, maxZoom, Time.deltaTime * sensitivity);
+        }
     }
 
     void CheckZoom()
     {
         if(binoculars.activeSelf && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomedIn, Time.deltaTime * smoothView);
             isZoomed = true;
         }
 
@@ -44,10 +48,9 @@ public class Binoculars : MonoBehaviour
 
         else if (!isZoomed)
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomedOut, Time.deltaTime * smoothView);
             isZoomed = false;
+            crosshair.SetActive(true);
         }
-        
     }
 
     void OnGUI()
@@ -59,5 +62,16 @@ public class Binoculars : MonoBehaviour
             crosshair.SetActive(false);
         } 
         
+    }
+
+    void ScrollWheelZoom()
+    {
+        float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
+        scrollWheelInput *= -1;
+
+        fov = _virtualCamera.m_Lens.FieldOfView;
+        fov += scrollWheelInput * sensitivity;
+        fov = Mathf.Clamp(fov, minZoom, maxZoom);
+        _virtualCamera.m_Lens.FieldOfView = fov;        
     }
 }

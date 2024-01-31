@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Sleep : MonoBehaviour
@@ -9,6 +12,9 @@ public class Sleep : MonoBehaviour
     [SerializeField] LayerMask mask;
     Vector3 mousePos;
     Camera cam;
+    [SerializeField] GameObject nightSky;
+    [SerializeField] GameObject daySky;
+    [SerializeField] GameObject darkening;
 
     private void Start()
     {
@@ -20,7 +26,24 @@ public class Sleep : MonoBehaviour
         GoSleep(mousePos, mask, cam, sleepUI, bed);
     }
 
-    private void GoSleep (Vector3 pos, LayerMask mask, Camera cam, GameObject UI, GameObject item)
+    static async Task Sleeping(GameObject Darkening, GameObject NightSky, GameObject DaySky)
+    {
+        Darkening.SetActive(true);
+
+        await Task.Delay(2000);
+
+        if (NightSky != null)
+        {
+            NightSky.SetActive(!NightSky.activeSelf);
+            DaySky.SetActive(!DaySky.activeSelf);
+        }
+
+        await Task.Delay(4000);
+
+        Darkening.SetActive(false);
+    }
+
+    private void GoSleep(Vector3 pos, LayerMask mask, Camera cam, GameObject UI, GameObject item)
     {
         pos = Input.mousePosition;
         pos.z = 100f;
@@ -48,6 +71,8 @@ public class Sleep : MonoBehaviour
                 if (hit.collider.gameObject == item)
                 {
                     // Koodi tähän, että mitä tapahtuu kun pelaaja painaa E:tä. Mahdollisesti uusi scene, missä voisi lukea "Day 2, Day3, Day4 yms...
+
+                    Sleeping(darkening, nightSky, daySky);
                 }
             }
         }
