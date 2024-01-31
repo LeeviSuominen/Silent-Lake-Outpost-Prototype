@@ -15,6 +15,8 @@ public class Sleep : MonoBehaviour
     [SerializeField] GameObject nightSky;
     [SerializeField] GameObject daySky;
     [SerializeField] GameObject darkening;
+    [SerializeField] GameObject WakingUp;
+    public float rotationSpeed = 0f;
 
     private void Start()
     {
@@ -26,11 +28,13 @@ public class Sleep : MonoBehaviour
         GoSleep(mousePos, mask, cam, sleepUI, bed);
     }
 
-    static async Task Sleeping(GameObject Darkening, GameObject NightSky, GameObject DaySky)
+    static async Task Sleeping(GameObject Darkening, GameObject NightSky, GameObject DaySky, GameObject WakingUp, float rotationSpeed)
     {
         Darkening.SetActive(true);
 
         await Task.Delay(2000);
+
+        WakingUp.SetActive(true);
 
         if (NightSky != null)
         {
@@ -41,6 +45,10 @@ public class Sleep : MonoBehaviour
         await Task.Delay(4000);
 
         Darkening.SetActive(false);
+
+        await Task.Delay(3000);
+
+        WakingUp.SetActive(false);
     }
 
     private void GoSleep(Vector3 pos, LayerMask mask, Camera cam, GameObject UI, GameObject item)
@@ -72,7 +80,7 @@ public class Sleep : MonoBehaviour
                 {
                     // Koodi tähän, että mitä tapahtuu kun pelaaja painaa E:tä. Mahdollisesti uusi scene, missä voisi lukea "Day 2, Day3, Day4 yms...
 
-                    Sleeping(darkening, nightSky, daySky);
+                    Sleeping(darkening, nightSky, daySky, WakingUp, rotationSpeed);
                 }
             }
         }
